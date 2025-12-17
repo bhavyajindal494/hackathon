@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEX Fitness - Fuel Your Strongest Self</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(57, 255, 20, 0.1);
+            padding: 1.2rem 5%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #39ff14, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #39ff14;
+        }
+
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            padding: 2rem 5%;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text h1 .highlight {
+            background: linear-gradient(135deg, #39ff14, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #39ff14, #00ff88);
+            color: #0a0a0a;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(57, 255, 20, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #39ff14;
+            padding: 1rem 2.5rem;
+            border: 2px solid #39ff14;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(57, 255, 20, 0.1);
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .stats-bar {
+            background: #141414;
+            padding: 3rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            border-top: 1px solid rgba(57, 255, 20, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #39ff14, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #808080;
+            font-size: 0.95rem;
+        }
+
+        .products-section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: #808080;
+            font-size: 1.1rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: #141414;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(57, 255, 20, 0.1);
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(57, 255, 20, 0.5);
+            box-shadow: 0 20px 50px rgba(57, 255, 20, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-tag {
+            display: inline-block;
+            background: rgba(57, 255, 20, 0.2);
+            color: #39ff14;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-info p {
+            color: #808080;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #39ff14;
+        }
+
+        .cart-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .btn-add {
+            background: rgba(57, 255, 20, 0.1);
+            color: #39ff14;
+            padding: 0.7rem 1.5rem;
+            border: 1px solid #39ff14;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add:hover {
+            background: #39ff14;
+            color: #0a0a0a;
+        }
+
+        .quantity-controls {
+            display: none;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(57, 255, 20, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            border: 1px solid #39ff14;
+        }
+
+        .qty-btn {
+            background: transparent;
+            color: #39ff14;
+            border: none;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .qty-btn:hover {
+            background: rgba(57, 255, 20, 0.2);
+            border-radius: 50%;
+        }
+
+        .qty-display {
+            color: #ffffff;
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .btn-view-cart {
+            background: #39ff14;
+            color: #0a0a0a;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-view-cart:hover {
+            background: #00ff88;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid rgba(57, 255, 20, 0.1);
+            padding: 3rem 5%;
+            text-align: center;
+            color: #808080;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo" onclick="window.location.href='#home'">APEX</div>
+        <nav>
+            <a href="#products">Products</a>
+            <a href="#features">Features</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Fuel Your <span class="highlight">Strongest Self</span></h1>
+                <p>Premium performance nutrition backed by science. Trusted by 10,000+ athletes who demand results.</p>
+                <div class="hero-cta">
+                    <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView({behavior: 'smooth'})">Shop Now</button>
+                    <button class="btn-secondary" onclick="window.location.href='#features'">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop" alt="Athlete training">
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-number">10K+</span>
+            <span class="stat-label">Active Athletes</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">4.8★</span>
+            <span class="stat-label">Average Rating</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Premium Products</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">24h</span>
+            <span class="stat-label">Fast Delivery</span>
+        </div>
+    </div>
+
+    <section class="products-section" id="products">
+        <div class="section-header">
+            <h2>Best Sellers</h2>
+            <p>Science-backed formulas for peak performance</p>
+        </div>
+        <div class="products-grid">
+            
+            <div class="product-card" data-product="whey-protein" data-price="3999" data-name="Elite Whey Protein" onclick="viewProduct('Elite Whey Protein')">
+                <div class="product-image">
+                    <img src="image copy.png" alt="Whey Protein Powder">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Best Seller</span>
+                    <h3>Elite Whey Protein</h3>
+                    <p>25g protein per serving. Fast absorption. Zero compromise on taste or quality.</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹3,999</span>
+                        <div class="cart-controls">
+                            <button class="btn-add" onclick="addToCart(event, this)">Add to Cart</button>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="decreaseQty(event, this)">-</button>
+                                <span class="qty-display">1</span>
+                                <button class="qty-btn" onclick="increaseQty(event, this)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="pre-workout" data-price="2999" data-name="Pre-Workout Ignite" onclick="viewProduct('Pre-Workout Ignite')">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=500&h=500&fit=crop&q=80" alt="Pre-Workout Supplement">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Top Rated</span>
+                    <h3>Pre-Workout Ignite</h3>
+                    <p>Clean energy boost. Enhanced focus. No crash, just pure performance.</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹2,999</span>
+                        <div class="cart-controls">
+                            <button class="btn-add" onclick="addToCart(event, this)">Add to Cart</button>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="decreaseQty(event, this)">-</button>
+                                <span class="qty-display">1</span>
+                                <button class="qty-btn" onclick="increaseQty(event, this)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="recovery" data-price="3499" data-name="Recovery Complex" onclick="viewProduct('Recovery Complex')">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=500&h=500&fit=crop&q=80" alt="Recovery Supplement">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">New</span>
+                    <h3>Recovery Complex</h3>
+                    <p>Advanced recovery formula. Reduce soreness. Train harder, recover faster.</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹3,499</span>
+                        <div class="cart-controls">
+                            <button class="btn-add" onclick="addToCart(event, this)">Add to Cart</button>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="decreaseQty(event, this)">-</button>
+                                <span class="qty-display">1</span>
+                                <button class="qty-btn" onclick="increaseQty(event, this)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="creatine" data-price="2299" data-name="Creatine Monohydrate" onclick="viewProduct('Creatine Monohydrate')">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?w=500&h=500&fit=crop&q=80" alt="Creatine Powder">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Popular</span>
+                    <h3>Creatine Monohydrate</h3>
+                    <p>Increase strength and muscle mass. 5g pure micronized creatine per serving.</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹2,299</span>
+                        <div class="cart-controls">
+                            <button class="btn-add" onclick="addToCart(event, this)">Add to Cart</button>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="decreaseQty(event, this)">-</button>
+                                <span class="qty-display">1</span>
+                                <button class="qty-btn" onclick="increaseQty(event, this)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="bcaa" data-price="2699" data-name="BCAA Recovery" onclick="viewProduct('BCAA Recovery')">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&h=500&fit=crop&q=80" alt="BCAA Supplement">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Essential</span>
+                    <h3>BCAA Recovery</h3>
+                    <p>7g of BCAAs in optimal 2:1:1 ratio. Intra-workout muscle support and hydration.</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹2,699</span>
+                        <div class="cart-controls">
+                            <button class="btn-add" onclick="addToCart(event, this)">Add to Cart</button>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="decreaseQty(event, this)">-</button>
+                                <span class="qty-display">1</span>
+                                <button class="qty-btn" onclick="increaseQty(event, this)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="bands" data-price="1999" data-name="Resistance Band Set" onclick="viewProduct('Resistance Band Set')">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=500&h=500&fit=crop&q=80" alt="Resistance Bands">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Gear</span>
+                    <h3>Resistance Band Set</h3>
+                    <p>5 bands with varying resistance levels. Perfect for home workouts and mobility.</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹1,999</span>
+                        <div class="cart-controls">
+                            <button class="btn-add" onclick="addToCart(event, this)">Add to Cart</button>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="decreaseQty(event, this)">-</button>
+                                <span class="qty-display">1</span>
+                                <button class="qty-btn" onclick="increaseQty(event, this)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-product="shaker" data-price="599" data-name="Premium Shaker" onclick="viewProduct('Premium Shaker')">
+                <div class="product-image">
+                    <img src="image copy 2.png" alt="Shaker Bottle">
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">Accessories</span>
+                    <h3>Premium Shaker</h3>
+                    <p>Leak-proof design with mixing ball. 700ml capacity. BPA-free materials.</p>
+                    <div class="product-footer">
+                        <span class="product-price">₹599</span>
+                        <div class="cart-controls">
+                            <button class="btn-add" onclick="addToCart(event, this)">Add to Cart</button>
+                            <div class="quantity-controls">
+                                <button class="qty-btn" onclick="decreaseQty(event, this)">-</button>
+                                <span class="qty-display">1</span>
+                                <button class="qty-btn" onclick="increaseQty(event, this)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="features" style="padding: 6rem 5%; text-align: center; background: #141414;">
+        <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 2rem;">Why Choose APEX?</h2>
+        <p style="color: #808080; font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
+            We combine cutting-edge science with premium ingredients to deliver supplements that actually work. 
+            Every product is third-party tested for purity and potency. Your gains, our guarantee.
+        </p>
+    </section>
+
+    <section id="contact" style="padding: 6rem 5%; text-align: center;">
+        <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 2rem;">Get In Touch</h2>
+        <p style="color: #808080; font-size: 1.1rem; margin-bottom: 2rem;">
+            Questions? Our team is here to help you reach your fitness goals.
+        </p>
+        <button class="btn-primary" onclick="alert('Contact us at: support@apexfitness.com\nPhone: +91 1800-123-4567')">Contact Support</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 APEX Fitness. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let cart = {};
+
+        function viewProduct(productName) {
+            alert(`📦 Product: ${productName}\n\n✅ View full details, reviews, and specifications.\n\n💡 Click "Add to Cart" to purchase!`);
+        }
+
+        function addToCart(event, button) {
+            event.stopPropagation();
+            
+            const card = button.closest('.product-card');
+            const productId = card.dataset.product;
+            const productName = card.dataset.name;
+            const productPrice = parseInt(card.dataset.price);
+            
+            if (!cart[productId]) {
+                cart[productId] = {
+                    name: productName,
+                    price: productPrice,
+                    quantity: 1
+                };
+            }
+            
+            const cartControls = button.closest('.cart-controls');
+            button.style.display = 'none';
+            cartControls.querySelector('.quantity-controls').style.display = 'flex';
+            
+            if (!cartControls.querySelector('.btn-view-cart')) {
+                const viewCartBtn = document.createElement('button');
+                viewCartBtn.className = 'btn-view-cart';
+                viewCartBtn.textContent = 'View Cart';
+                viewCartBtn.onclick = function(e) {
+                    e.stopPropagation();
+                    showCart();
+                };
+                cartControls.appendChild(viewCartBtn);
+            }
+            
+            console.log('Cart:', cart);
+        }
+
+        function increaseQty(event, button) {
+            event.stopPropagation();
+            
+            const card = button.closest('.product-card');
+            const productId = card.dataset.product;
+            const qtyDisplay = button.parentElement.querySelector('.qty-display');
+            
+            cart[productId].quantity++;
+            qtyDisplay.textContent = cart[productId].quantity;
+            console.log('Cart:', cart);
+        }
+
+        function decreaseQty(event, button) {
+            event.stopPropagation();
+            
+            const card = button.closest('.product-card');
+            const productId = card.dataset.product;
+            const qtyDisplay = button.parentElement.querySelector('.qty-display');
+            
+            if (cart[productId].quantity > 1) {
+                cart[productId].quantity--;
+                qtyDisplay.textContent = cart[productId].quantity;
+            } else {
+                delete cart[productId];
+                
+                const cartControls = button.closest('.cart-controls');
+                cartControls.querySelector('.btn-add').style.display = 'block';
+                cartControls.querySelector('.quantity-controls').style.display = 'none';
+                const viewCartBtn = cartControls.querySelector('.btn-view-cart');
+                if (viewCartBtn) viewCartBtn.remove();
+                qtyDisplay.textContent = '1';
+            }
+            
+            console.log('Cart:', cart);
+        }
+
+        function showCart() {
+            if (Object.keys(cart).length === 0) {
+                alert('🛒 Your cart is empty!\n\nBrowse our products and add items to get started.');
+                return;
+            }
+
+            const cartItems = Object.entries(cart).map(([id, item]) => {
+                return `${item.name} x${item.quantity} - ₹${(item.price * item.quantity).toLocaleString()}`;
+            }).join('\n');
+            
+            const total = Object.values(cart).reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            alert(`🛒 YOUR CART\n\n${cartItems}\n\n━━━━━━━━━━━━━━━━━\n💰 Total: ₹${total.toLocaleString()}\n\n✅ Ready to checkout!`);
+        }
+    </script>
+
+</body>
+</html>
